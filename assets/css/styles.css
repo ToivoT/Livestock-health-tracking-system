@@ -1,0 +1,248 @@
+/* Custom styles for LHVTS */
+:root {
+    --primary-color: #2c5530;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --info-color: #17a2b8;
+    --light-bg: #f8f9fa;
+    --dark-text: #343a40;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-bg);
+    color: var(--dark-text);
+}
+
+/* Header styles */
+.navbar-brand {
+    font-weight: bold;
+    color: var(--primary-color) !important;
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Card styles */
+.card {
+    border: none;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+
+.card-header {
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 10px 10px 0 0 !important;
+    border: none;
+}
+
+/* Form styles */
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(44, 85, 48, 0.25);
+}
+
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(44, 85, 48, 0.25);
+}
+
+/* Button styles */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: #1e3a21;
+    border-color: #1e3a21;
+}
+
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Dashboard styles */
+.dashboard-card {
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-2px);
+}
+
+.stat-card {
+    background: linear-gradient(135deg, var(--primary-color), #3a6b3f);
+    color: white;
+}
+
+.stat-card .card-body {
+    padding: 1.5rem;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.stat-label {
+    opacity: 0.9;
+    font-size: 0.9rem;
+}
+
+/* Table styles */
+.table {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table thead th {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    font-weight: 500;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(44, 85, 48, 0.05);
+}
+
+/* Status badges */
+.status-healthy { background-color: var(--success-color); }
+.status-due { background-color: var(--warning-color); }
+.status-overdue { background-color: var(--danger-color); }
+.status-sick { background-color: var(--danger-color); }
+
+/* Loading spinner */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loading-spinner {
+    width: 3rem;
+    height: 3rem;
+    border: 0.4rem solid #f3f3f3;
+    border-top: 0.4rem solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Alert styles */
+.alert {
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    .table-responsive {
+        font-size: 0.9rem;
+    }
+}
+
+/* Offline indicator */
+.offline-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--warning-color);
+    color: var(--dark-text);
+    text-align: center;
+    padding: 0.5rem;
+    font-weight: bold;
+    z-index: 1000;
+    display: none;
+}
+
+.offline-indicator.show {
+    display: block;
+}
+
+/* Form validation styles */
+.is-invalid {
+    border-color: var(--danger-color);
+}
+
+.is-valid {
+    border-color: var(--success-color);
+}
+
+.invalid-feedback {
+    color: var(--danger-color);
+}
+
+.valid-feedback {
+    color: var(--success-color);
+}
+
+/* Quick action buttons */
+.quick-action {
+    background: white;
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: var(--primary-color);
+    display: block;
+}
+
+.quick-action:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+.quick-action i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Navigation breadcrumb */
+.breadcrumb {
+    background-color: transparent;
+    padding: 0;
+    margin-bottom: 1rem;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    color: var(--secondary-color);
+}
