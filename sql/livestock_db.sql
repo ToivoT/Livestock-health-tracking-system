@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 12, 2025 at 02:16 AM
+-- Generation Time: Aug 12, 2025 at 12:19 PM
 -- Server version: 8.0.34
 -- PHP Version: 8.2.12
 
@@ -61,7 +61,9 @@ CREATE TABLE `livestock` (
 --
 
 INSERT INTO `livestock` (`id`, `species`, `birth_date`, `owner_id`, `animal_id`, `breed`, `gender`, `color`, `weight`, `location`, `notes`, `created_at`) VALUES
-(1, 'cattle', '2025-08-11', 7, '1485', 'hereford', 'male', 'black', '680', 'Windhoek', 'Healthy', '2025-08-11 12:27:46');
+(1, 'cattle', '2025-08-11', 7, '1485', 'hereford', 'male', 'black', '680', 'Windhoek', 'Healthy', '2025-08-11 12:27:46'),
+(2, 'sheep', '2025-08-05', 8, '1486', 'Dorper', 'female', 'white', '100', '', 'heealthy', '2025-08-12 03:55:40'),
+(3, 'goat', '2025-08-11', 8, '1488', 'boer', 'male', 'black', '140', 'swakopmund', 'greatest of all time', '2025-08-12 03:57:36');
 
 -- --------------------------------------------------------
 
@@ -89,7 +91,8 @@ INSERT INTO `users` (`id`, `username`, `password`, `role`, `Email`, `phone`, `fu
 (5, 'vet1', '$2y$10$V...hashedStringHere...', 'vet', NULL, NULL, NULL, '2025-08-10 18:32:45'),
 (6, 'admin1', '$2y$10$V...hashedStringHere...', 'admin', NULL, NULL, NULL, '2025-08-10 18:32:45'),
 (7, 'jr_toivo', '$2y$10$R17JAW75.uXOd0hHbKOSc.dyZ4VXb.Dkw7AhJAD6A0VKLnJo1rgJq', 'extension_officer', 'toivotauno0321@gmail.com', '+264815605924', 'Tauno ', '2025-08-10 18:32:49'),
-(8, 'MK', '$2y$10$IKVT7Wi1yNF7EVhcGZw6i.gUZQebuZXzRMY6WN7f6Sr12g11aNfRO', 'farmer', 'moanakalupeteka@gmail.com', '+264812345678', 'Moana Kalupeteka', '2025-08-11 20:14:52');
+(8, 'MK', '$2y$10$IKVT7Wi1yNF7EVhcGZw6i.gUZQebuZXzRMY6WN7f6Sr12g11aNfRO', 'farmer', 'moanakalupeteka@gmail.com', '+264812345678', 'Moana Kalupeteka', '2025-08-11 20:14:52'),
+(9, 'JB', '$2y$10$SG7j.CZdDZ.HYiBLYT.LieZDuLx1xq30YHpndT2Idx64aUWIX6Pf6', 'vet', 'jb@gmail.com', '+264818765432', 'James Bond', '2025-08-12 01:08:12');
 
 -- --------------------------------------------------------
 
@@ -102,6 +105,12 @@ CREATE TABLE `vaccinations` (
   `type` varchar(100) NOT NULL,
   `date_administered` date NOT NULL,
   `due_date` date DEFAULT NULL,
+  `next_due_date` date DEFAULT NULL,
+  `batch_number` varchar(50) DEFAULT NULL,
+  `notes` text,
+  `administered_by` int DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `livestock_id` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -135,7 +144,8 @@ ALTER TABLE `users`
 --
 ALTER TABLE `vaccinations`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `livestock_id` (`livestock_id`);
+  ADD KEY `livestock_id` (`livestock_id`),
+  ADD KEY `idx_vaccinations_due_date` (`due_date`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -151,13 +161,13 @@ ALTER TABLE `disease_reports`
 -- AUTO_INCREMENT for table `livestock`
 --
 ALTER TABLE `livestock`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `vaccinations`
