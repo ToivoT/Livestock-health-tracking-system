@@ -69,16 +69,7 @@ $logged_out = isset($_GET['logged_out']);
                             </a>
                         </div>
                         
-                        <div class="mt-4 text-center">
-                            <small class="text-muted">
-                                <strong>Demo Accounts:</strong><br>
-                                Admin: admin / password<br>
-                                Farmer: farmer1 / password<br>
-                                Vet: vet1 / password
-                            </small>
-                        </div>
-                    </div>
-                </div>
+                        
                 
                 <div class="text-center mt-4">
                     <div class="row text-center text-muted">

@@ -351,6 +351,12 @@ function addVaccination() {
             }
         }
         
+        // FIX: Convert empty strings to NULL for date fields
+        $date_administered = !empty($input['date_administered']) ? $input['date_administered'] : null;
+        $next_due_date = !empty($next_due_date) ? $next_due_date : null;
+        $batch_number = !empty($input['batch_number']) ? $input['batch_number'] : null;
+        $notes = !empty($input['notes']) ? $input['notes'] : null;
+        
         // Insert vaccination record
         $stmt = $pdo->prepare("
             INSERT INTO vaccinations (livestock_id, type, date_administered, due_date, next_due_date, batch_number, notes, administered_by, created_at) 
@@ -360,11 +366,11 @@ function addVaccination() {
         $stmt->execute([
             $input['livestock_id'],
             $input['type'],
-            $input['date_administered'] ?? null,
+            $date_administered,  // Now properly NULL if empty
             $input['due_date'],
-            $next_due_date,
-            $input['batch_number'] ?? null,
-            $input['notes'] ?? null,
+            $next_due_date,      // Now properly NULL if empty
+            $batch_number,       // Now properly NULL if empty
+            $notes,              // Now properly NULL if empty
             $userId
         ]);
         
@@ -440,7 +446,12 @@ function updateVaccination() {
         foreach ($allowedFields as $field) {
             if (isset($input[$field])) {
                 $updateFields[] = "$field = ?";
-                $updateValues[] = $input[$field];
+                // FIX: Convert empty strings to NULL for date and optional fields
+                if (in_array($field, ['date_administered', 'next_due_date', 'batch_number', 'notes'])) {
+                    $updateValues[] = !empty($input[$field]) ? $input[$field] : null;
+                } else {
+                    $updateValues[] = $input[$field];
+                }
             }
         }
         
